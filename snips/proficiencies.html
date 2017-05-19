@@ -1,0 +1,24 @@
+<div id="characterSheet" class="col-md-4" ng-show="tab == 3">
+    <h1>Proficiencies</h1>
+    <div>Languages:<select class="form-control" ng-model="tempLang" >
+        <option ng-repeat="l in languages" value="{{l.language}}">{{l.language}}</option></select>
+    </div>
+    <input type="button" ng-click="addLanguage(tempLang)" value="Add Language" class="form-control" />
+    <!--Next Line-->
+    <div>Weapon Proficiencies:<select class="form-control" ng-model="tempWepProf" >
+        <option ng-repeat="w in weaponType" value="{{w.weapon}}">{{w.weapon}}</option></select>
+    </div>
+    <input type="button" ng-click="addWeaponProf(tempWepProf)" value="Add Weapon Proficiency" class="form-control" />
+    <!--Next Line-->
+    <div>Armor Proficiencies:<select class="form-control" ng-model="tempArmor" >
+        <option ng-repeat="a in armor" value="{{a}}">{{a.armor}}</option></select>
+    </div>
+    <input type="button" ng-click="addArmorProf(tempArmor)" value="Add Armor Proficiency" class="form-control" />
+    <!--Next Line-->
+    <div>Tool Proficiencies:<select class="form-control" ng-model="tempTools" >
+        <option ng-repeat="t in tools" value="{{t}}">{{t.tool}}</option></select>
+    </div>
+    <input type="button" ng-click="addToolProf(tempTools)" value="Add Tool Proficiency" class="form-control" />
+    <!--Next Line-->
+    <input type="button" value="Next Tab" ng-click="tabMod(4)" />
+</div>

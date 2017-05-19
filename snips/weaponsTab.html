@@ -1,0 +1,17 @@
+<div class="col-md-4" ng-show="tab == 2">
+    <pre>
+        {{template.weapons | json}}
+    </pre>
+
+
+    <h1>Build Weapon</h1>
+    <div>Name:<input type="input" class="form-control" value="Weapon Name" ng-model="myWeapon.name" /></div>
+    <div>Weapon Type:<select class="form-control" ng-model="myWeapon.type" ng-blur="setWeaponType(myWeapon.type)">
+        <option ng-repeat="w in weaponType" value="{{w.weapon}}">{{w.weapon}}</option></select>
+    </div>
+
+    <div>Reference:<input type="input" class="form-control" value="url" ng-model="myWeapon.url" /></div>
+    <br />
+    <input type="button" class="form-control" value="Add Weapon" ng-click="addWeapon()" />
+    <input type="button" value="Next Tab" ng-click="tabMod(3)" />
+</div>

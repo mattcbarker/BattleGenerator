@@ -1,0 +1,44 @@
+.box{
+    display: inline-block;
+    margin: 5px;
+    padding: 3px;
+    text-align: center;
+}
+
+div.box:hover{
+    background-color: red;
+}
+
+.edit {
+
+    min-height: 400px;
+}
+
+.charwindow{
+    min-height: 400px;
+    min-width: 60%;
+
+}
+
+.center{
+    text-align: center;
+}
+
+.inline{
+    display: inline-block;
+    width: 40px;
+}
+
+.fullheight{
+    height: 100%;
+}
+
+.smallbutton{
+    width: 120px;
+    display: inline-block;
+}
+
+.selected{
+    background-color: green;
+    height: 100%;
+}

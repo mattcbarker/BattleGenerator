@@ -1,0 +1,15 @@
+<div class="col-md-4" ng-show="tab == 5">
+    <pre>
+        {{template.inventory | json}}
+    </pre>
+    <h1>Inventory Items</h1>
+
+    <div>Name:<input type="input" class="form-control" value="Inventory Name" ng-model="tempInventory.name" /></div>
+    <div>Desc:<input type="input" class="form-control" value="Inventory Description" ng-model="tempInventory.desc" /></div>
+    <div>Ref:<input type="input" class="form-control" value="Inventory Ref" ng-model="tempInventory.ref" /></div>
+    <br />
+    <input type="button" class="form-control" value="Add Inventory Item" ng-click="addInventory()" />
+    <br />
+    <input type="button" value="Next Tab" ng-click="tabMod(6)" />
+
+</div>

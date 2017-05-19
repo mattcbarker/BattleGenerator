@@ -1,0 +1,14 @@
+<div class="col-md-4" ng-show="tab == 2">
+    <ul>
+        <li type="button" ng-repeat="atk in template.attacks track by $index" >{{template.attacks[$index].name}}</li>
+    </ul>
+
+    <h1>Build Weapon</h1>
+    <div>Name:<input type="input" class="form-control" value="Weapon Name" ng-model="weapon.name" /></div>
+    <div>Damage:<input type="input" class="form-control" value="Damage" ng-model="weapon.damage" /></div>
+    <div>type:<input type="input" class="form-control" value="type" ng-model="weapon.type" /></div>
+    <div>properties:<input type="input" class="form-control" value="properties" ng-model="weapon.properties" /></div>
+    <div>Reference:<input type="input" class="form-control" value="url" ng-model="weapon.url" /></div>
+
+    <input type="button" class="form-control" value="Add Weapon" ng-click="" />
+</div>

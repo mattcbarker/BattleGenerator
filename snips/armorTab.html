@@ -1,0 +1,25 @@
+<div class="col-md-4" ng-show="tab == 4">
+    <pre>
+        {{template.armor | json}}
+    </pre>
+
+
+    <h1>Build armor</h1>
+    <div>Name:<input type="input" class="form-control" value="armor Name" ng-model="tempItemArmor.name" /></div>
+    <div>armor Type:<select class="form-control" ng-model="tempItemArmor.type" ng-blur="setarmorType(tempItemArmor.type)">
+        <option ng-repeat="a in armor" value="{{a}}">{{a.armor}}</option></select>
+    </div>
+    <div>
+        <span>Bonuses?</span>
+        <select class="form-control" ng-model="armorBonus">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+    </div>
+
+
+    <div>Reference:<input type="input" class="form-control" value="url" ng-model="tempItemArmor.url" /></div>
+    <br />
+    <input type="button" class="form-control" value="Add armor" ng-click="addArmor()" />
+    <input type="button" value="Next Tab" ng-click="tabMod(5)" />
+</div>

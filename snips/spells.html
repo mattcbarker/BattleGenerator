@@ -1,0 +1,30 @@
+<div class="col-md-4" ng-show="tab == 7">
+    <h1>Spells</h1>
+
+    <div>spell Name:<input type="input" class="form-control" value="spellName" ng-model="tempSpell.name" /></div>
+    <div>spell Desc:<input type="input" class="form-control" value="spell Desc" ng-model="tempSpell.desc" /></div>
+
+    <div>spell URL:<input type="input" class="form-control" value="spell URL" ng-model="tempSpell.url" /></div>
+
+    <div>spell level:
+        <select class="form-control" ng-model="tempSpell.level">
+            <option value="cantrip">cantrip</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+    </div>
+
+
+    <br />
+    <input type="button" class="form-control" value="Add spell" ng-click="addSpell()" />
+    <br />
+    <input type="button" value="Add to PCs" ng-click="addToPC()" />
+    <br  />
+</div>

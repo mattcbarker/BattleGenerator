@@ -1,0 +1,17 @@
+<div class="col-md-12">
+    <div class="col-md-2 selected">
+        <p>{{selected.characerName}}</p>
+        <p>{{selected.hp}}</p>
+    </div>
+
+    <div class="box col-md-8"  >
+        <div ng-repeat="pc in activePCs track by $index" class="smallbutton" ng-click="newTest($index)">
+            <img src="http://placehold.it/50x50" value="{{imageAddress}}"/>
+            <div>HP: {{pc.characerName}}</div>
+            <div>Init: {{pc.init}}</div>
+        </div>
+
+    </div>
+
+
+</div>

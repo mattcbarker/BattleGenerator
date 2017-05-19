@@ -1,0 +1,40 @@
+<div class="col-md-12">
+    <div class="col-md-12">
+        <input type="button" value="Load PCs" ng-click="loadPCs()" />
+        <input type="button" value="delte PCs" ng-click="deleteLocal()" />
+        <input type="button" value="dupe Char" ng-click="duplicateChar()" />
+        <input type="button" value="new Char" ng-click="addNewChar()" />
+        <input type="button" value="save Char" ng-click="saveChar()" />
+        <input type="button" value="dice" ng-click="dice(1,6,4)" />
+        <input type="button" value="Battle Table" ng-click ="toggleBattleTable()" />
+    </div>
+
+    <div ng-show="battleTableActive == true">
+        <battle-table></battle-table>
+    </div>
+
+
+    <div ng-show="battleTableActive == false">
+        <div class="col-md-8 charwindow">
+            <div class="box" ng-repeat="pc in activePCs track by $index" ng-click="selectChar(pc)">
+                <img src="http://placehold.it/100x100" value="{{imageAddress}}"/>
+                <div>Name:{{pc.characerName}}</div>
+                <div>AC: {{pc.stats.ac}}</div>
+                <div>HP: {{pc.hp}}</div>
+                <input type="button" value="Delete" ng-click="deleteThis($index)" />
+            </div>
+        </div>
+
+        <div class="edit col-md-4">
+            <char-sheet ng-show="tab == 0"></char-sheet>
+            <stats ng-show="tab == 1" class="col-md-4"></stats>
+            <skills ng-show="tab == 2" class="col-md-4"></skills>
+            <weapons-tab ng-show="tab == 3" class="col-md-4"></weapons-tab>
+            <proficiencies ng-show="tab == 4" class="col-md-4"></proficiencies>
+            <armor-tab ng-show="tab == 5" class="col-md-4"></armor-tab>
+            <equipment ng-show="tab == 6" class="col-md-4"></equipment>
+            <feats ng-show="tab == 7" class="col-md-4"></feats>
+            <spells ng-show="tab == 8" class="col-md-4"></spells>
+        </div>
+    </div>
+</div>

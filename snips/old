@@ -1,0 +1,43 @@
+<div class="col-md-3 fullheight">
+        <h1>Friendly</h1>
+        HP:<input type="input"  class="form-control" value="HP" ng-model="quickResolveTemplate.hp" />
+        AC:<input type="input"  class="form-control" value="AC" ng-model="quickResolveTemplate.ac" />
+        <input type="input"  class="form-control inline" value="Num" ng-model="quickResolveTemplate.atk.num" />
+        d<input type="input"  class="form-control inline" value="Sided Dice" ng-model="quickResolveTemplate.atk.sidedDice" />
+        <input type="input"  class="form-control inline" value="Modifier" ng-model="quickResolveTemplate.atk.mod" /><br />
+        INIT:<input type="input"  class="form-control" value="INIT" ng-model="quickResolveTemplate.initBonus" />
+        How Many: <input type="input"  class="form-control" value="Numb of Friendlies" ng-model="numberToAdd" />
+        <input type="button" class="form-control" value="Load friendlies" ng-click="populate(friendlies,quickResolveTemplate,numberToAdd )" />
+        <hr /><hr />
+        <h1>Enemy</h1>
+        HP:<input type="input"  class="form-control" value="HP" ng-model="quickResolveEnemyTemplate.hp" />
+        AC:<input type="input"  class="form-control" value="AC" ng-model="quickResolveEnemyTemplate.ac" />
+        <input type="input"  class="form-control inline" value="Num" ng-model="quickResolveEnemyTemplate.atk.num" />
+        d<input type="input"  class="form-control inline" value="Sided Dice" ng-model="quickResolveEnemyTemplate.atk.sidedDice" />
+        <input type="input"  class="form-control inline" value="Modifier" ng-model="quickResolveEnemyTemplate.atk.mod" /><br />
+        INIT:<input type="input"  class="form-control" value="INIT" ng-model="quickResolveEnemyTemplate.initBonus" />
+        How Many: <input type="input"  class="form-control" value="Numb of Friendlies" ng-model="numberToAddEnemy" />
+        <input type="button" class="form-control" value="Load enemies" ng-click="populate(enemies,quickResolveEnemyTemplate,numberToAddEnemy )" />
+
+</div>
+<div class="col-md-9">
+    <input type="button" value="roll for intitive" class="form-control smallbutton" ng-click="rollForInitive()" />
+    <input type="button" value="load Battle" class="form-control smallbutton" ng-click="loadBattle()" />
+    <input type="button" value="sort List" class="form-control smallbutton" ng-click="initOrder()" />
+    <input type="button" value="1 Round Action" class="form-control smallbutton" ng-click="attackRound()" />
+    <input type="button" value="empty tables" class="form-control smallbutton" ng-click="emptyTables()" />
+    <hr /><hr />
+    <div class="box" ng-repeat="pc in friendlies track by $index" >
+        <img src="http://placehold.it/50x50" value="{{imageAddress}}"/>
+        <div>HP: {{pc.hp}}</div>
+        <div>Init: {{pc.init}}</div>
+    </div>
+
+    <hr /><hr />
+
+    <div class="box" ng-repeat="npc in enemies track by $index" >
+        <img src="http://placehold.it/50x50" value="{{imageAddress}}"/>
+        <div>HP: {{npc.hp}}</div>
+        <div>Init: {{npc.init}}</div>
+    </div>
+</div>
