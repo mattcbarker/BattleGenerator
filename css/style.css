@@ -5,8 +5,19 @@
     text-align: center;
 }
 
+
+
+
 div.box:hover{
     background-color: red;
+}
+
+
+.input{
+    display: inline-block;
+    margin: 5px;
+    padding: 3px;
+    text-align: center;
 }
 
 .edit {
@@ -39,6 +50,21 @@ div.box:hover{
 }
 
 .selected{
-    background-color: green;
-    height: 100%;
+    background-color: gray;
+    min-height: 400px;
+}
+
+.portrait{
+    width: 100px;
+    height:100px;
+}
+
+.padding{
+    padding: 3px;
+    margin: 10px;
+}
+
+.quick {
+    width:200px;
+    display: inline;
 }

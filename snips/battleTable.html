@@ -1,17 +1,58 @@
-<div class="col-md-12">
-    <div class="col-md-2 selected">
-        <p>{{selected.characerName}}</p>
-        <p>{{selected.hp}}</p>
-    </div>
+<div class="row">
+    <h1>Character Library</h1>
+    <input type="button" value="New Char" class="form-control smallbutton" id="myBtn"/>
+    <input type="button" value="Quick Build " class="form-control smallbutton" ng-click="quickBuild()" />
 
-    <div class="box col-md-8"  >
-        <div ng-repeat="pc in activePCs track by $index" class="smallbutton" ng-click="newTest($index)">
-            <img src="http://placehold.it/50x50" value="{{imageAddress}}"/>
-            <div>HP: {{pc.characerName}}</div>
-            <div>Init: {{pc.init}}</div>
+    <div class="col-md-12 padding" id="quickbuild" ng-show="quickBuildInt == true">
+        <h3>Quick Add</h3>
+        <p>
+            Name: <input type="input"  class="form-control smallbutton" value="name" ng-model="template.characerName" />
+            Hp:<input type="input" class="form-control smallbutton" value="HP" ng-model="template.hp" />
+            Inititive:<input type="input" class="form-control smallbutton" value="name" ng-model="template.stats.init" />
+        </p>
+
+        <p>
+            armor Type:<select class="form-control smallbutton" ng-model="template.armor" ng-blur="">
+                <option ng-repeat="a in library.armor" value="{{a}}">{{a.armor}} @{{a.ac}}AC</option></select>
+                <span> + </span>
+                <input type="input" ng-model="armorBonus" ng-blur="calcAC(template.armor)" />
+                <span> = </span>
+                <span>{{template.stats.ac}}</span>
+
+            Weapon Type:<select class="form-control smallbutton" ng-model="template.mainWeapon" ng-blur="">
+                <option ng-repeat="w in library.weaponType" value={{w}}>{{w.weapon}} {{w.damage}}</option></select>
+                <span> + </span>
+                <input type="input" ng-model="weaponBonus" ng-blur="calcAttackRoll(template.mainWeapon)" />
+                <span> = </span>
+                <span>{{template.damage}}</span>
+        </p>
+
+
+        <input type="button" value="submit" ng-click="addToPC()" />
+    </div>
+    <div class="col-md-3 selected">
+
+        <div ng-show=" $scope.selected !== {}" class="center">
+
+            <p>Name: {{selected.characerName}}</p>
+            <!--p>Level {{selected.charLevel}} {{selected.race}} {{selected.charClass}}</p-->
+            <p>HP: {{selected.hp}} / AC: {{selected.stats.ac}}</p>
+            <p>Damage Roll: {{selected.damage}}</p>
+            <input type="text" ng-model="damageDealt" ng-click="damageCharacter()" />
+            <!input type="button" ng-click="RemoveThisPC()" value="Remove This Character From List"/>
+            <input type="button" ng-click="addToBattle()" value="Add this character to the battle" />
         </div>
 
     </div>
+
+    <div class=" col-md-9"  ng-show="true" id="Character List">
+        <div class="box smallbutton" ng-repeat="pc in activePCs track by $index" ng-click="select($index)">
+            <img src="http://placehold.it/200x200" value="{{imageAddress}}" class="img-responsive portrait"/>
+            <div>HP: {{pc.characerName}}</div>
+            <div>Init: {{pc.stats.init}}</div>
+        </div>
+    </div>
+
 
 
 </div>

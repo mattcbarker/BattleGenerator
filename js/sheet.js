@@ -9,44 +9,13 @@ var app = angular.module('dndSheet', ["ngStorage"]);
 
 app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$localStorage', function($scope, $filter, $window, $parse, $sce, $localStorage){
 
+//Tab Modifiers
 	$scope.tab = 0;
-
 	$scope.tabMod = function(mod){
 		$scope.tab = mod;
 	};
 
-	$scope.modifiers = [
-		{score:1, mod:"neg5"},
-		{score:2, mod:"neg4"},
-		{score:3, mod:"neg4"},
-		{score:4, mod:"neg3"},
-		{score:5, mod:"neg3"},
-		{score:6, mod:"neg2"},
-		{score:7, mod:"neg2"},
-		{score:8, mod:"neg1"},
-		{score:9, mod:"neg1"},
-		{score:10, mod:"plus0"},
-		{score:11, mod:"plus0"},
-		{score:12, mod:"plus1"},
-		{score:13, mod:"plus1"},
-		{score:14, mod:"plus2"},
-		{score:15, mod:"plus2"},
-		{score:16, mod:"plus3"},
-		{score:17, mod:"plus3"},
-		{score:18, mod:"plus4"},
-		{score:19, mod:"plus4"},
-		{score:20, mod:"plus5"},
-		{score:21, mod:"plus5"},
-		{score:22, mod:"plus6"},
-		{score:23, mod:"plus6"},
-		{score:24, mod:"plus7"},
-		{score:25, mod:"plus7"},
-		{score:26, mod:"plus8"},
-		{score:27, mod:"plus8"},
-		{score:28, mod:"plus9"},
-		{score:29, mod:"plus9"},
-		{score:30, mod:"plus10"},
-	];
+
 
 	//weapons Functionality
 	$scope.weaponArmory = [];
@@ -62,45 +31,7 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 			}
 		}
 	};
-	$scope.weaponType = [
-		{weapon:"Club",cost:"01 sp",damage:"1d4 bludgeoning", weight:"2 lb.", properties: "Light"},
-		{weapon:"Dagger",cost:"02 gp",damage:"1d4 piercing", weight:"1 lb.", properties: "Finesse, light, thrown (range 20/60)"},
-		{weapon:"Greatclub",cost:"02 sp",damage:"1d8 bludgeoning", weight:"10 lb.", properties: "Two-handed"},
-		{weapon:"Handaxe",cost:"05 gp",damage:"1d6 slashing", weight:"2 lb.", properties: "Light, thrown (range 20/60)"},
-		{weapon:"Javelin",cost:"05 sp",damage:"1d6 piercing", weight:"2 lb.", properties: "Thrown (range 30/120)"},
-		{weapon:"Light Hammer",cost:"02 sp",damage:"1d4 bludgeoning", weight:"2 lb.", properties: "Light, thrown (range 20/60)"},
-		{weapon:"Mace",cost:"05 gp",damage:"1d6 bludgeoning", weight:"4 lb.", properties: "—"},
-		{weapon:"Quarterstaff",cost:"02 sp",damage:"1d6 bludgeoning", weight:"4 lb.", properties: "Versatile (1d8)"},
-		{weapon:"Sickle",cost:"01 gp",damage:"1d4 slashing", weight:"2 lb.", properties: "Light"},
-		{weapon:"Spear",cost:"01 gp",damage:"1d6 piercing", weight:"3 lb.", properties: "Thrown (range 20/60), versatile (1d8)"},
-		{weapon:"Crossbow, Light",cost:"25 gp",damage:"1d8 piercing", weight:"5 lb.", properties: "Ammunition (range 80/320), loading, two-handed"},
-		{weapon:"Dart",cost:"05 cp",damage:"1d4 piercing", weight:"¼ lb.", properties: "Finesse, thrown (range 20/60)"},
-		{weapon:"Shortbow",cost:"25 gp",damage:"1d6 piercing", weight:"2 lb.", properties: "Ammunition (range 80/320), two-handed"},
-		{weapon:"Slings",cost:"01 sp",damage:"1d4 bludgeoning", weight:"—",properties: "Ammunition (range 30/120)"},
-		{weapon:"Battleaxe",cost:"10 gp",damage:"1d8 slashing", weight:"4 lb.", properties: "Versatile (1d10)"},
-		{weapon:"Flail",cost:"10 gp",damage:"1d8 bludgeoning", weight:"2 lb.", properties: "—"},
-		{weapon:"Glaive",cost:"20 gp",damage:"1d10 slashing", weight:"6 lb.", properties: "Heavy, reach, two-handed"},
-		{weapon:"Greataxe",cost:"30 gp",damage:"1d12 slashing", weight:"7 lb.", properties: "Heavy, two-handed"},
-		{weapon:"Greatsword",cost:"50 gp",damage:"2d6 slashing", weight:"6 lb.", properties: "Heavy, two-handed"},
-		{weapon:"Halberd",cost:"20 gp",damage:"1d10 slashing", weight:"6 lb.", properties: "Heavy, reach, two-handed"},
-		{weapon:"Lance",cost:"10 gp",damage:"1d12 piercing", weight:"6 lb.", properties: "Reach, special"},
-		{weapon:"Longsword",cost:"15 gp",damage:"1d8 slashing", weight:"3 lb.", properties: "Versatile (1d10)"},
-		{weapon:"Maul",cost:"10 gp",damage:"2d6 bludgeoning", weight:"10 lb.", properties: "Heavy, two-handed"},
-		{weapon:"Morningstar",cost:"15 gp",damage:"1d8 piercing", weight:"4 lb.", properties: "—"},
-		{weapon:"Pike",cost:"05 gp",damage:"1d10 piercing", weight:"18 lb.", properties: "Heavy, reach, two-handed"},
-		{weapon:"Rapier",cost:"25 gp",damage:"1d8 piercing", weight:"2 lb.", properties: "Finesse"},
-		{weapon:"Scimitar",cost:"25 gp",damage:"1d6 slashing", weight:"3 lb.", properties: "Finesse, light"},
-		{weapon:"Shortsword",cost:"10 gp",damage:"1d6 piercing", weight:"2 lb.", properties: "Finesse, light"},
-		{weapon:"Trident",cost:"05 gp",damage:"1d6 piercing", weight:"4 lb.", properties: "Thrown (range 20/60), versatile (1d8)"},
-		{weapon:"War Pick",cost:"05 gp",damage:"1d8 piercing", weight:"2 lb.", properties: "—"},
-		{weapon:"Warhammer",cost:"15 gp",damage:"1d8 bludgeoning", weight:"2 lb.", properties: "Versatile (1d10)"},
-		{weapon:"Whip",cost:"02 gp",damage:"1d4 slashing", weight:"3 lb.", properties: "Finesse, reach"},
-		{weapon:"Blowgun",cost:"10 gp",damage:"1 piercing", weight:"1 lb.", properties: "Ammunition (range 25/100), loading"},
-		{weapon:"Crossbow, Hand",cost:"75 gp",damage:"1d6 piercing", weight:"3 lb.", properties: "Ammunition (range 30/120), light, loading"},
-		{weapon:"Crossbow, Heavy",cost:"50 gp",damage:"1d10 piercing", weight:"18 lb.", properties: "Ammunition (range 100/400), heavy, loading, two-handed"},
-		{weapon:"Longbow",cost:"50 gp",damage:"1d8 piercing", weight:"2 lb.", properties: "Ammunition (range 150/600), heavy, two-handed"},
-		{weapon:"Net",cost:"01 gp",damage:"—",weight:"3 lb.", properties: "Special, thrown (range 5 to 15)",},
-	];
+
 
 	$scope.addWeapon = function(){
 		weapon = $scope.myWeapon;
@@ -129,75 +60,21 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 	$scope.addArmorProf = function(armorProf) {
 		$scope.template.Proficiencies.armor.push(armorProf);
 	};
+
+
 	$scope.addArmor = function(){
 		$scope.template.armor.push($scope.tempItemArmor);
 		$scope.armorArmory.push($scope.tempItemArmor);
 		$scope.tempItemArmor = {};
 	};
-	$scope.armor = [
-		{armor:"Padded", ac:"11  dexMod", type:"light, stealth disadvantage"},
-		{armor:"Leather", ac:"11  dexMod", type:"light"},
-		{armor:"Studded leather", ac:"12  dexMod", type:"light"},
-		{armor:"Hide", ac:"12  dexMod" +"(max 2)", type:"medium"},
-		{armor:"Chain shirt", ac:"13  dexMod"+"(max 2)", type:"medium"},
-		{armor:"Scale mail", ac:"14  dexMod"+"(max 2)", type:"medium, stealth disadvantage"},
-		{armor:"Breastplate", ac:"14  dexMod"+"(max 2)", type:"medium"},
-		{armor:"Half plate", ac:"15  dexMod"+"(max 2)", type:"medium, stealth disadvantage"},
-		{armor:"Ring mail", ac:"14", type:"heavy, stealth disadvantage"},
-		{armor:"Chain mail", ac:"16", type:"heavy, stealth disadvantage, Str 13"},
-		{armor:"Splint", ac:"17", type:"heavy, stealth disadvantage, Str 15"},
-		{armor:"Plate", ac:"18", type:"heavy, stealth disadvantage, Str 15"},
-		{armor:"Shield", ac:"+2", type:"modifies Base AC"},
-	];
+
 
 
 	$scope.tempTools =	{};
 	$scope.addToolProf = function(toolProf) {
 		$scope.template.Proficiencies.tools.push(toolProf);
 	};
-	$scope.tools =[
-		{tool:"Artisans tools", cost:"", weight:"",},
-		{tool:"Alchemists supplies",cost:"50 gp",weight:"8 lb.",},
-		{tool:"Brewers supplies",cost:"20 gp",weight:"9 lb.",},
-		{tool:"Calligraphers supplies",cost:"10 gp",weight:"5 lb.",},
-		{tool:"Carpenters tools",cost:"8 gp",weight:"6 lb.",},
-		{tool:"Cartographers tools",cost:"15 gp.",weight:"6 lb.",},
-		{tool:"Cobblers tools",cost:"5 gp",weight:"5 lb.",},
-		{tool:"Cooks utensils",cost:"1 gp",weight:"8 lb.",},
-		{tool:"Glassblowers tools",cost:"30 gp",weight:"5 lb.",},
-		{tool:"Jewelers tools",cost:"25 gp",weight:"2 lb.",},
-		{tool:"Leatherworkers tools",cost:"5 gp",weight:"5 lb.",},
-		{tool:"Masons tools",cost:"10 gp",weight:"8 lb.",},
-		{tool:"Painters supplies",cost:"10 gp",weight:"5 lb.",},
-		{tool:"Potters tools",cost:"10 gp",weight:"3 lb.",},
-		{tool:"Smiths tools",cost:"20 gp",weight:"8 lb.",},
-		{tool:"Tinkers tools",cost:"50 gp",weight:"10 lb.",},
-		{tool:"Weavers tools",cost:"1 gp",weight:"5 lb.",},
-		{tool:"Woodcarvers tools",cost:"1 gp",weight:"5 lb.",},
-		{tool:"Disguise kit",cost:"25 gp",weight:"3 lb.",},
-		{tool:"Forgery kit",cost:"15 gp",weight:"5 lb.",},
-		{tool:"Gaming set",cost:"n/a",weight:"n/a",},
-		{tool:"Dice set",cost:"1 sp",weight:"—",},
-		{tool:"Dragonchess set",cost:"1 gp",weight:"1/2 lb.",},
-		{tool:"Playing card set",cost:"5 sp",weight:"—",},
-		{tool:"Three-Dragon Ante set",cost:"1 gp",weight:"—",},
-		{tool:"Herbalism kit",cost:"5 gp",weight:"3 lb.",},
-		{tool:"Musical instrument",cost:"n/a",weight:"n/a",},
-		{tool:"Bagpipes",cost:"30 gp",weight:"6 lb.",},
-		{tool:"Drum",cost:"6 gp",weight:"3 lb.",},
-		{tool:"Dulcimer",cost:"25 gp",weight:"10 lb.",},
-		{tool:"Flute",cost:"2 gp",weight:"1 lb.",},
-		{tool:"Lute",cost:"35 gp",weight:"2 lb.",},
-		{tool:"Lyre",cost:"30 gp",weight:"2 lb.",},
-		{tool:"Horn",cost:"3 gp",weight:"2 lb.",},
-		{tool:"Pan flute",cost:"12 gp",weight:"2 lb.",},
-		{tool:"Shawm",cost:"2 gp",weight:"1 lb.",},
-		{tool:"Viol",cost:"30 gp",weight:"1 lb.",},
-		{tool:"Navigators tools",cost:"25 gp",weight:"2 lb.",},
-		{tool:"Poisoners kit",cost:"50 gp",weight:"2 lb.",},
-		{tool:"Thieves tools",cost:"25 gp",weight:"1 lb.",},
-		{tool:"Vehicles (land or water)",cost:"n/a",weight:"n/a",},
-	];
+
 
 
 	$scope.tempInventory = {};
@@ -263,7 +140,7 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 	$scope.addToPC = function(){
 		$localStorage.pcs.push($scope.template);
 		console.log($localStorage.pcs);
-		$scope.tabMod(9);
+		//$scope.tabMod(9);
 	};
 
 	$scope.addToNPC = function(){
@@ -320,17 +197,11 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 			init:0,
 			speed:30,
 			strength:10,
-			strMod:0,
 			dex:10,
-			dexMod:0,
 			con:10,
-			conMod:0,
 			intel:10,
-			intMod:0,
 			wisdom:10,
-			wisdomMod:0,
 			charisma:10,
-			chaMod:0,
 			passiveWis:10,
 		},
 		savingThrows:{
@@ -362,13 +233,15 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 			survival:0,
 		},
 		weapons:[],
+		mainWeapon: {},
+		damage:{},
 		Proficiencies: {
 			languages:[],
 			weaponProf:[],
 			armor:[],
 			tools:[],
 		},
-		armor: [],
+		armor: {},
 		inventory: [],
 		featsAndTraits:[],
 		casterInfo:{
@@ -408,69 +281,13 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		 equipRef:"",
 	};
 
-	$scope.classes = [
-		"Barbarian",
-		"Bard",
-		"Cleric",
-		"Druid",
-		"Fighter",
-		"Monk",
-		"Paladin",
-		"Ranger",
-		"Rogue",
-		"Sorcerer",
-		"Warlock",
-		"Wizard",
-	];
 
-	$scope.races = [
-		"Dwarf",
-		"Elf",
-		"Halfling",
-		"Human",
-		"Dragonborn",
-		"Gnome",
-		"Half-Elf",
-		"Half-Orc",
-		"Tiefling",
-	];
 
-	$scope.alignment = [
-		"Lawful Good",
-		"Lawful Neutral",
-		"Lawful Evil",
-		"Neutral Good",
-		"True Neutral",
-		"Neutral Evil",
-		"Chaotic Good",
-		"Chaotic Neutral",
-		"Chaotic Evil",
-	];
 
-	$scope.languages =[
-		{language:"Abyssal", speakers:"Demons, chaotic evil outsiders", script:"Infernal"},
-		{language:"Aquan", speakers:"Water-based creatures", script:"Elven"},
-		{language:"Auran", speakers:"Air-based creatures", script:"Draconic"},
-		{language:"Celestial", speakers:"Celestials (angels, devas)", script:"Celestial"},
-		{language:"Common", speakers:"Humans, halflings, half-elves, half-orcs", script:"Common"},
-		{language:"Deep Speech", speakers:"Mind flayers, beholders", script:"-"},
-		{language:"Draconic", speakers:"Kobolds, troglodytes, lizardfolk, dragons, dragonborn", script:"Draconic"},
-		{language:"Druidic", speakers:"Druids (only)", script:"Druidic"},
-		{language:"Dwarvish", speakers:"Dwarves", script:"Dwarvish"},
-		{language:"Elvish", speakers:"Elves", script:"Elvish"},
-		{language:"Giant", speakers:"Ogres, giants", script:"Dwarvish"},
-		{language:"Gnomish", speakers:"Gnomes", script:"Dwarvish"},
-		{language:"Goblin", speakers:"Goblinoids, hobgoblins, bugbears", script:"Dwarvish"},
-		{language:"Gnoll", speakers:"Gnolls", script:"Common"},
-		{language:"Halfling", speakers:"Halflings", script:"Common"},
-		{language:"Ignan", speakers:"Fire-based creatures", script:"Draconic"},
-		{language:"Infernal", speakers:"Devils, Tieflings", script:"Infernal"},
-		{language:"Orc", speakers:"Orcs", script:"Dwarvish"},
-		{language:"Primordial", speakers:"Elementals", script:"Dwarvish"},
-		{language:"Sylvan", speakers:"Fey creatures (dryads, brownies, leprechauns)", script:"Elvish"},
-		{language:"Terran", speakers:"Xorns and other earth-based creatures", script:"Dwarven"},
-		{language:"Undercommon", speakers:"Drow, Underdark traders", script:"Elvish"},
-	];
+
+
+
+
 
 
 ///battle table
@@ -608,40 +425,101 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		$scope.enemies = $localStorage.enemies;
 	};
 
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
+	$scope.selected = {};
+	$scope.selectedIndex;
+	$scope.library;
+	$scope.armorBonus=0;
+	$scope.weaponBonus=0;
+	$scope.quickBuildInt = false;
 
 	$scope.init = function(){
+		//using this one
 		if($localStorage.pcs === undefined){
 			$localStorage.pcs = [];
 			console.log("pcs defined");
 		}
-		if($localStorage.npcs === undefined){
-			$localStorage.npcs = [];
-			console.log("npcs defined");
-		}
-		if($localStorage.friendlies === undefined){
-			$localStorage.friendlies = [];
-			console.log("battle defined");
-		}
-		if($localStorage.enemies === undefined){
-			$localStorage.enemies = [];
+		if($localStorage.battle === undefined){
+			$localStorage.battle = [];
 			console.log("battle defined");
 		}
 
 		template = $scope.template;
+		$scope.library = library;
 		$scope.loadPCs();
 	}
 
 	$scope.log = function(){
-		console.log($localStorage.pcs);
+		console.log	($localStorage.battle);
 	}
 
-	$scope.newTest = function(i){
-		console.log($localStorage.pcs[i].characerName);
+//Selection from Our Library of PCs
+	$scope.select = function(i){
 		$scope.selected = $localStorage.pcs[i];
+		$scope.selectedIndex = i;
 	}
 
-	$scope.selected = {};
+	$scope.RemoveThisPC = function(){
+		window.alert($scope.selectedIndex);
+		//$localStorage.pcs.splice($scope.selectedIndex, 1);
+	}
+
+
+	$scope.quickBuild = function(){
+			console.log($scope.quickBuildInt);
+		if($scope.quickBuildInt == true){
+			$scope.quickBuildInt = false;
+		}
+		else{
+			$scope.quickBuildInt = true;
+
+		}
+	}
+
+////////////////////////////////
+
+
+	$scope.calcAC= function(a){
+		var parsedArmor = JSON.parse(a);
+		var parseBonus = JSON.parse($scope.armorBonus);
+		var newAC= parsedArmor.ac + parseBonus;
+		if(parsedArmor.mod == "dex"){
+			if(parsedArmor.notes == "(max 2)"){
+				//console.log("only add 2 dex");
+			}
+			//console.log("Add all dex");
+		}
+		$scope.template.stats.ac = newAC;
+	};
+
+	$scope.calcAttackRoll= function(w){
+		var parsedWeapon = JSON.parse(w);
+		//var parseBonus = JSON.parse($scope.weaponBonus);
+		//var newAC= parsedArmor.ac + parseBonus;
+		var newWDamage = parsedWeapon.damage +" + "+$scope.weaponBonus;
+		//if(parsedArmor.mod == "dex"){
+		//	if(parsedArmor.notes == "(max 2)"){
+				//console.log("only add 2 dex");
+			//}
+			//console.log("Add all dex");
+		//}
+		$scope.template.damage = newWDamage;
+	};
+
+
+	$scope.damageCharacter = function(damage){
+		var i= $scope.selectedIndex;
+
+	}
+
+
+	$scope.addToBattle = function(){
+		var char = $localStorage.pcs[$scope.selectedIndex];
+		$localStorage.battle.push(char);
+	}
+
 
 	$scope.init();
 }]);

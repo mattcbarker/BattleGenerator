@@ -1,24 +1,24 @@
-<div id="characterSheet" class="col-md-12">
-	<div><input type="button" value="Next Tab" ng-click="tabMod(1)" /></div>
-	Name:<input type="input"  class="form-control" value="name" ng-model="template.characerName" />
-	Player Level:<input type="input" class="form-control" value="name" ng-model="template.charLevel" />
-	<div>Classes:
-		<select class="form-control" ng-model="template.charClass">
-			<option ng-repeat="c in classes" value="{{c}}">{{c}}</option>
+<div id="characterSheet" class="col-md-12 input">
+	<!--div><input type="button" value="Next Tab" ng-click="tabMod(1)" /></div-->
+	Name: <input type="input"  class="form-control smallbutton" value="name" ng-model="template.characerName" />
+	Player Level: <input type="input" class="form-control smallbutton" value="name" ng-model="template.charLevel" />
+	<div>Classes: {{template.characerName}} test
+		<select class="form-control smallbutton" ng-model="template.charClass">
+			<option ng-repeat="c in library.classes" value="{{c}}">{{c}}</option>
 		</select>
 	</div>
 	<div>Races:
-		<select class="form-control" ng-model="template.race">
-			<option ng-repeat="r in races" value="{{r}}">{{r}}</option>
+		<select class="form-control smallbutton" ng-model="template.race">
+			<option ng-repeat="r in library.races" value="{{r}}">{{r}}</option>
 		</select>
 	</div>
 	<div>alignment:
-		<select class="form-control" ng-model="template.alignment">
-			<option ng-repeat="a in alignment" value="{{a}}">{{a}}</option>
+		<select class="form-control smallbutton" ng-model="template.alignment">
+			<option ng-repeat="a in library.alignment" value="{{a}}">{{a}}</option>
 		</select>
 	</div>
-	<div>Armor Count:<input type="input" class="form-control" value="name" ng-model="template.stats.ac" /></div>
-	<div>Hp:<input type="input" class="form-control" value="HP" ng-model="template.hp" /></div>
-	<div>Speed:<input type="input" class="form-control" value="speed" ng-model="template.stats.speed" /></div>
-	<div>Inititive:<input type="input" class="form-control" value="name" ng-model="template.stats.init" /></div>
+	<!--div>Armor Count:<input type="input" class="form-control" value="name" ng-model="template.stats.ac" /></div-->
+	<!--div>Hp:<input type="input" class="form-control" value="HP" ng-model="template.hp" /></div-->
+	<div>Speed:<input type="input" class="form-control smallbutton" value="speed" ng-model="template.stats.speed" /></div>
+	<!--div>Inititive:<input type="input" class="form-control" value="name" ng-model="template.stats.init" /></div-->
 </div>

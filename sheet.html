@@ -7,20 +7,22 @@
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/ngStorage.min.js"></script>
+		<script type="text/javascript" src="js/library.js"></script>
 		<script type="text/javascript" src="js/sheet.js"></script>
+
 	</head>
 	<body ng-app="dndSheet">
 		<div class="container" ng-controller="sheetC">
-			<div class="col-md-12">
-				<h1>Battle_Manager</h1>
-				<input type="button" value="Log Shit" class="form-control smallbutton" ng-click="log()" />
-
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Battle_Manager</h1>
+					<input type="button" value="Log Shit" class="form-control smallbutton" ng-click="log()" />
+					
+				</div>
 			</div>
-			<div>
-				<!--pc-list class="col-md-12"></pc-list-->
+			<div class="row">
 				<battle-table></battle-table>
 			</div>
-
 		</div>
 	</body>
 </html>
