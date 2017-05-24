@@ -68,3 +68,10 @@ div.box:hover{
     width:200px;
     display: inline;
 }
+
+.teamBox {
+    min-height: 350px;
+    display: block;
+    text-align: center;
+    outline: 2px solid black;
+}

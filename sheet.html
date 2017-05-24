@@ -17,11 +17,14 @@
 				<div class="col-md-12">
 					<h1>Battle_Manager</h1>
 					<input type="button" value="Log Shit" class="form-control smallbutton" ng-click="log()" />
-					
+					<input type="button" value="Char Library" class="form-control smallbutton" ng-click="toggleView(0)" />
+					<input type="button" value="Battle Screen" class="form-control smallbutton" ng-click="toggleView(1)" />
+
 				</div>
 			</div>
 			<div class="row">
-				<battle-table></battle-table>
+				<char-library ng-show="view==0"></char-library>
+				<battle ng-show="view==1"></battle>
 			</div>
 		</div>
 	</body>

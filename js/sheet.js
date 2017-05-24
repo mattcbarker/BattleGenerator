@@ -15,8 +15,6 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		$scope.tab = mod;
 	};
 
-
-
 	//weapons Functionality
 	$scope.weaponArmory = [];
 	$scope.myWeapon = {name:"", damage: "abunch", type:"", cost:"", weight:"", properties:""};
@@ -137,11 +135,7 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		$scope.tempSpell = {};
 	};
 
-	$scope.addToPC = function(){
-		$localStorage.pcs.push($scope.template);
-		console.log($localStorage.pcs);
-		//$scope.tabMod(9);
-	};
+
 
 	$scope.addToNPC = function(){
 		$localStorage.npcs.push($scope.template);
@@ -188,6 +182,7 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		characerName:"",
 		charClass:[],
 		hp: 10,
+		maxhp: 10,
 		charLevel:0,
 		race:"" ,
 		alignment:"",
@@ -281,48 +276,6 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		 equipRef:"",
 	};
 
-
-
-
-
-
-
-
-
-
-///battle table
-	$scope.battleTableActive = false;
-	$scope.toggleBattleTable = function(){
-		if($scope.battleTableActive == false){
-			$scope.battleTableActive = true;
-			console.log($scope.battleTableActive);
-		};
-
-	};
-	$scope.friendlies = [];
-	$scope.enemies = [];
-	$scope.initive =[];
-	$scope.numberToAdd = 0;
-	$scope.numberToAddEnemy = 0;
-
-	$scope.quickResolveTemplate = {
-		hp:10,
-		ac:10,
-		atk: {num:1,sidedDice:6,mod:4},
-		initBonus:0,
-		init:0,
-		team:"",
-	};
-
-	$scope.quickResolveEnemyTemplate = {
-		hp:10,
-		ac:10,
-		atk: {num:1,sidedDice:6,mod:4},
-		initBonus:0,
-		init:0,
-		team:"",
-	};
-
 	$scope.dice = function(num,sidedDice, mod){
 		var finalNumber = 0;
 		for(var i=0; i < num ; i++ ){
@@ -334,43 +287,14 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		return finalNumber;
 	};
 
-
-
-	$scope.populate = function(list, template, howmany){
-		for(i=0; i< howmany; i++){
-			list.push(template);
-
-			if(list == $scope.friendlies){
-				$localStorage.battle.friendlies = $localStorage.friendlies.push(template)
-				//console.log($localStorage.friendlies+ "local'd");
-			}
-			if(list == $scope.enemies){
-				$localStorage.battle.enemies = $localStorage.enemies.push(template);
-				//console.log($localStorage.enemies+ "local'd");
-			}
-		}
-	}
-
 	$scope.rollForInitive = function() {
-		for(var i=0; i<$scope.friendlies.length; i++){
+		for(var i=0; i<	$scope.redTeam.length; i++){
 			var init = Math.floor(Math.random()*(20 - 1)) + 1;
-			$scope.friendlies[i].init = init;
-			$scope.friendlies[i].team = "blue";
+			$scope.redTeam[i].stats.init = init;
+			$localStorage.redTeam[i].stats.init = init;
+			console.log($scope.redTeam[i].stats.init);
 		}
-		for(var j=0; j<$scope.enemies.length; j++){
-			var init = Math.floor(Math.random()*(20 - 1)) + 1;
-			$scope.enemies[j].init = init;
-			$scope.enemies[j].team = "red";
-		}
-	}
-	$scope.initList =[];
-	$scope.initOrder = function(){
-		$scope.initList = $scope.initList.concat($scope.friendlies);
-		$scope.initList = $scope.initList.concat($scope.enemies);
-		console.log($scope.initList);
 	};
-
-
 
 	$scope.attackRound = function(){
 		for(i=0; i< $scope.initList.length; i++){
@@ -420,30 +344,47 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		console.log("round over");
 	}
 
-	$scope.loadBattle = function(){
-		$scope.friendlies = $localStorage.friendlies;
-		$scope.enemies = $localStorage.enemies;
-	};
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
+	//Nav Vars
 	$scope.selected = {};
 	$scope.selectedIndex;
 	$scope.library;
+	$scope.quickBuildInt = false;
+	$scope.view = 0;
+
+	//Quick Build Values
 	$scope.armorBonus=0;
 	$scope.weaponBonus=0;
-	$scope.quickBuildInt = false;
 
+
+	//Team Related Values
+	$scope.blueTeam = [];
+	$scope.redTeam = [];
+	$scope.team = "";
+
+	//Damage Values
+	$scope.damage ={
+		value: 0,
+		bHurt: true,
+	}
+
+	//Begin Functions
 	$scope.init = function(){
 		//using this one
 		if($localStorage.pcs === undefined){
 			$localStorage.pcs = [];
 			console.log("pcs defined");
 		}
-		if($localStorage.battle === undefined){
-			$localStorage.battle = [];
-			console.log("battle defined");
+		if($localStorage.redTeam === undefined){
+			$localStorage.redTeam = [];
+			console.log("redTeam defined");
+		}
+		if($localStorage.blueTeam === undefined){
+			$localStorage.blueTeam = [];
+			console.log("blueTeam defined");
 		}
 
 		template = $scope.template;
@@ -451,8 +392,8 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		$scope.loadPCs();
 	}
 
-	$scope.log = function(){
-		console.log	($localStorage.battle);
+	$scope.log = function(input){
+		console.log	(input);
 	}
 
 //Selection from Our Library of PCs
@@ -461,9 +402,22 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		$scope.selectedIndex = i;
 	}
 
-	$scope.RemoveThisPC = function(){
-		window.alert($scope.selectedIndex);
-		//$localStorage.pcs.splice($scope.selectedIndex, 1);
+	$scope.addToPC = function(){
+		$scope.template.maxhp=$scope.template.hp;
+		$localStorage.pcs.push($scope.template);
+
+	};
+	
+	$scope.RemoveThisPC = function(char){
+		var bIndex = $scope.blueTeam.indexOf(char);
+		var rIndex = $scope.redTeam.indexOf(char);
+		if(bIndex >= 0){
+			$scope.blueTeam.splice(bIndex, 1);
+		}
+		if(rIndex >= 0){
+			$scope.redTeam.splice(rIndex, 1);
+		}
+
 	}
 
 
@@ -477,6 +431,18 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 
 		}
 	}
+
+	$scope.toggleView = function(index){
+		$scope.view = index;
+		if(index == 1){
+			//this is the battle tab. Refresh it
+			$scope.blueTeam = $localStorage.blueTeam;
+			$scope.redTeam = $localStorage.redTeam;
+			console.log("Refreshed Teams")
+		}
+	}
+
+
 
 ////////////////////////////////
 
@@ -508,17 +474,26 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		$scope.template.damage = newWDamage;
 	};
 
-
-	$scope.damageCharacter = function(damage){
-		var i= $scope.selectedIndex;
-
+	$scope.damageCharacter = function(char){
+		if($scope.damage.bHurt == true){
+			char.hp = char.hp - $scope.damage.value;
+			console.log(char);
+		}
+		//call a function to mod the CSS
 	}
-
 
 	$scope.addToBattle = function(){
 		var char = $localStorage.pcs[$scope.selectedIndex];
-		$localStorage.battle.push(char);
+		if($scope.team == "Red Team"){
+			$localStorage.redTeam.push(char);
+			$scope.toggleView(1);
+		}
+		if($scope.team == "Blue Team"){
+			$localStorage.blueTeam.push(char);
+			$scope.toggleView(1);
+		}
 	}
+
 
 
 	$scope.init();
@@ -607,9 +582,16 @@ app.directive("stats", function() {
 	};
 });
 
-app.directive("battleTable", function() {
+app.directive("charLibrary", function() {
 	return{
 		restrict:'E',
-		templateUrl:"snips/battleTable.html"
+		templateUrl:"snips/charLibrary.html"
+	};
+});
+
+app.directive("battle", function() {
+	return{
+		restrict:'E',
+		templateUrl:"snips/battle.html"
 	};
 });
