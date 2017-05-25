@@ -2,25 +2,36 @@
     <input type="button" value="Roll for initive" ng-click="rollForInitive()"  />
     <div class="col-md-12 " id="Blue Team">
         <h3>Blue Team</h3>
-        <div class="col-md-2 teamBox" ng-repeat="b in blueTeam">
-            <p>{{r.name}}</p>
+        <div class="col-md-2 teamBox blue" ng-repeat="b in blueTeam">
+            <h4>{{b.characerName}}</h4>
+            <p>HP: {{b.hp}} / {{b.maxhp}}</p>
+            <p>AC: {{b.stats.ac}}</p>
+            <span>Initive: </span>
+            <input type="text" class="form-control" ng-model="b.stats.init"  />
+            <hr />
+            <span>Damage Handler</span>
+            <input type="text" class="form-control" ng-model="damage.value" value="How much damage?" />
+            Hurt?: <input type="checkbox" class="form-control" ng-model="damage.bHurt"/>
+            <input type="button" class="form-control" ng-click="damageCharacter(b)" value="Apply Damage" />
+            <input type="button" class="form-control" ng-click="log(b)" value="log" />
+            <input type="button" class="form-control" ng-click="RemoveThisPC(b)" value="Remove Char" />
         </div>
     </div>
     <div class="col-md-12 " id="Red Team">
         <h3>Red Team</h3>
-        <div class="col-md-2 teambox" ng-repeat="r in redTeam">
-            <h4>Name:{{r.characerName}}</h4>
+        <div class="col-md-2 teambox red" ng-repeat="r in redTeam">
+            <h4>{{r.characerName}}</h4>
             <p>AC: {{r.stats.ac}}</p>
             <p>HP: {{r.hp}} / {{r.maxhp}}</p>
             <span>Initive: </span>
-            <input type="text" ng-model="r.stats.init"  />
+            <input type="text" class="form-control" ng-model="r.stats.init"  />
             <hr />
             <span>Damage Handler</span>
-            <input type="text" ng-model="damage.value" value="How much damage?" />
-            Hurt?: <input type="checkbox"ng-model="damage.bHurt"/>
-            <input type="button" ng-click="damageCharacter(r)" value="Apply Damage" />
-            <input type="button" ng-click="log(r)" value="log" />
-            <input type="button" ng-click="RemoveThisPC(r)" value="Remove Char" />
+            <input type="text" ng-model="damage.value" class="form-control" value="How much damage?" />
+            Hurt?: <input type="checkbox" class="form-control" ng-model="damage.bHurt"/>
+            <input type="button" class="form-control" ng-click="damageCharacter(r)" value="Apply Damage" />
+            <input type="button" class="form-control" ng-click="log(r)" value="log" />
+            <input type="button" class="form-control" ng-click="RemoveThisPC(r)" value="Remove Char" />
         </div>
     </div>
 

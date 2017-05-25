@@ -292,7 +292,11 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 			var init = Math.floor(Math.random()*(20 - 1)) + 1;
 			$scope.redTeam[i].stats.init = init;
 			$localStorage.redTeam[i].stats.init = init;
-			console.log($scope.redTeam[i].stats.init);
+		}
+		for(var i=0; i<	$scope.blueTeam.length; i++){
+			var init = Math.floor(Math.random()*(20 - 1)) + 1;
+			$scope.blueTeam[i].stats.init = init;
+			$localStorage.blueTeam[i].stats.init = init;
 		}
 	};
 
@@ -407,7 +411,7 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		$localStorage.pcs.push($scope.template);
 
 	};
-	
+
 	$scope.RemoveThisPC = function(char){
 		var bIndex = $scope.blueTeam.indexOf(char);
 		var rIndex = $scope.redTeam.indexOf(char);
@@ -494,6 +498,9 @@ app.controller('sheetC', ["$scope", "$filter",'$window', '$parse', '$sce', '$loc
 		}
 	}
 
+	$scope.modColor = function(element) {
+
+	}
 
 
 	$scope.init();
